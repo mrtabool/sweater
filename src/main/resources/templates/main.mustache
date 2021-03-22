@@ -1,18 +1,12 @@
 <html>
 
 <body>
-    <form method="post">
-        <input type="text" name="text" placeholder="Введите сообщение" />
-        <input type="text" name="tag" placeholder="Тэг">
-        <button type="submit">Добавить</button>
+    <div>Загрузите CSV файл на ваш компьютер.</div>
+    <form method="get" action="/download">
+        <button type="douload">Dounload</button>
     </form>
-    <div>Список сообщений</div>
-    <form method="post" action="filter">
-        <input type="text" name="filter">
-        <button type="submit">Find</button>
-    </form>
-
-    <form method="post" action="/csv" enctype="multipart/form-data">
+    <div>Выберите файл который загрузили и отправьте на сервер.</div>
+    <form method="post" action="csv" enctype="multipart/form-data">
         <input type="file" name="csv">
         <input type="submit" value="Upload">
     </form>

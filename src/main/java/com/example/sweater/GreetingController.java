@@ -3,21 +3,29 @@ package com.example.sweater;
 import au.com.bytecode.opencsv.CSVReader;
 import com.example.sweater.domain.Car;
 import com.example.sweater.repos.CarRepo;
+import com.example.sweater.utils.MediaTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.servlet.ServletContext;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class GreetingController {
+
+    private static final String DIRECTORY = "src/main/resources";
+    private static final String DEFAULT_FILE_NAME = "carData.csv";
+
+    @Autowired
+    private ServletContext servletContext;
     @Autowired
     private CarRepo carRepo;
 
@@ -26,9 +34,26 @@ public class GreetingController {
     public String main(Map<String, Object> model) {
         return "main";
     }
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> downloadFile(
+            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        System.out.println("fileName: " + fileName);
+        System.out.println("mediaType: " + mediaType);
+
+        File file = new File(DIRECTORY + "/" + fileName);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .contentType(mediaType)
+                .contentLength(file.length()) //
+                .body(resource);
+    }
 
 
-    @PostMapping("/csv")
+    @PostMapping("csv")
     public String uploadCSV(@RequestParam("csv") MultipartFile csv, Map<String, Object> model) {
         String[] captions;
         String[] values;
