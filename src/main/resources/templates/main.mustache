@@ -3,12 +3,43 @@
 <body>
     <div>Загрузите CSV файл на ваш компьютер.</div>
     <form method="get" action="/download">
-        <button type="douload">Dounload</button>
+        <button type="download">Download</button>
     </form>
     <div>Выберите файл который загрузили и отправьте на сервер.</div>
     <form method="post" action="csv" enctype="multipart/form-data">
         <input type="file" name="csv">
         <input type="submit" value="Upload">
     </form>
+
+    <form method="post" action="getMachine">
+        <select name="country">
+            <option selected disabled>Выберите страну</option>
+            {{#machines}}
+                <option value={{country}}>{{country}}</option>
+            {{/machines}}
+        </select>
+        <input type="submit" value="Отправить">
+    </form>
+
+
+    <table>
+        {{#machines}}
+            <tr>
+<!--                <td>{{sourceId}}</td>-->
+<!--                <td>{{owner}}</td>-->
+<!--                <td>{{available}}</td>-->
+                <td>{{country}}</td>
+<!--                <td>{{currency}}</td>-->
+<!--                <td>{{machineInfo}}</td>-->
+                <td>{{machineType}}</td>
+<!--                <td>{{photos}}</td>-->
+                <td>{{price}}</td>
+<!--                <td>{{source}}</td>-->
+<!--                <td>{{url}}</td>-->
+            </tr>
+        {{/machines}}
+    </table>
+
+
 </body>
 </html>

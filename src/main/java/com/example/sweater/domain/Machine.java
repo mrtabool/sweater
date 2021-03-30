@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Car {
+public class Machine {
 
     private String owner;
     private String available;

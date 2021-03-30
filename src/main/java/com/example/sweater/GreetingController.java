@@ -1,8 +1,8 @@
 package com.example.sweater;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.example.sweater.domain.Car;
-import com.example.sweater.repos.CarRepo;
+import com.example.sweater.domain.Machine;
+import com.example.sweater.repos.MachineRepo;
 import com.example.sweater.utils.MediaTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,14 +28,22 @@ public class GreetingController {
     @Autowired
     private ServletContext servletContext;
     @Autowired
-    private CarRepo carRepo;
+    private MachineRepo machineRepo;
 
 
     @GetMapping
     public String main(Map<String, Object> model) {
+        Iterable<Machine> machines = machineRepo.findAll();
+        model.put("machines", machines);
         return "main";
     }
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    @PostMapping("getMachine")
+    public String selectCountry(@RequestParam("country") String country, Map<String, Object> model){
+        Iterable<Machine> machines = machineRepo.findAll();
+        model.put("machines", machines);
+        return "main";
+    }
+    @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile(
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
 
@@ -44,6 +53,7 @@ public class GreetingController {
 
         File file = new File(DIRECTORY + "/" + fileName);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
@@ -57,8 +67,8 @@ public class GreetingController {
     public String uploadCSV(@RequestParam("csv") MultipartFile csv, Map<String, Object> model) {
         String[] captions;
         String[] values;
-        Map<String, String> carMap = new HashMap<>();
-        Car car;
+        Map<String, String> machineMap = new HashMap<>();
+        Machine machine;
 
         try (InputStream stream = csv.getInputStream();
              CSVReader csvReader = new CSVReader(new InputStreamReader(stream, "UTF-8"))) {
@@ -71,29 +81,28 @@ public class GreetingController {
                 while ((values = csvReader.readNext()) != null) {
                     if (captions.length == values.length) {
                         for (int i = 0; i < captions.length; i++) {
-                            carMap.put(captions[i], values[i]);
+                            machineMap.put(captions[i], values[i]);
                         }
-                        car = new Car();
-                        car.setOwner(carMap.get("owner"));
-                        car.setAvailable(carMap.get("available"));
-                        car.setCountry(carMap.get("country"));
-                        car.setCurrency(carMap.get("currency"));
-                        car.setMachineInfo(carMap.get("machineInfo"));
-                        car.setMachineType(carMap.get("machineType"));
-                        car.setPhotos(carMap.get("photos"));
-                        car.setSourceId(carMap.get("sourceId"));
-                        car.setPrice(carMap.get("price"));
-                        car.setSource(carMap.get("source"));
-                        car.setUrl(carMap.get("url"));
+                        machine = new Machine();
+                        machine.setOwner(machineMap.get("owner"));
+                        machine.setAvailable(machineMap.get("available"));
+                        machine.setCountry(machineMap.get("country"));
+                        machine.setCurrency(machineMap.get("currency"));
+                        machine.setMachineInfo(machineMap.get("machineInfo"));
+                        machine.setMachineType(machineMap.get("machineType"));
+                        machine.setPhotos(machineMap.get("photos"));
+                        machine.setSourceId(machineMap.get("sourceId"));
+                        machine.setPrice(machineMap.get("price"));
+                        machine.setSource(machineMap.get("source"));
+                        machine.setUrl(machineMap.get("url"));
 
-                        carRepo.save(car);
+                        machineRepo.save(machine);
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("DONE");
         return "main";
     }
 }
