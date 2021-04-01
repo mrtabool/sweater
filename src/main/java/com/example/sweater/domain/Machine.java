@@ -1,13 +1,16 @@
 package com.example.sweater.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
 
 @Entity
+@DynamicUpdate
 public class Machine {
 
+    @Id
+    private String sourceId;
+    @Column(name = "owner")
     private String owner;
     private String available;
     private String country;
@@ -15,11 +18,17 @@ public class Machine {
     private String machineInfo;
     private String machineType;
     private String photos;
-    @Id
-    private String sourceId;
     private String price;
     private String source;
     private String url;
+
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId;
+    }
 
     public String getOwner() {
         return owner;
@@ -75,14 +84,6 @@ public class Machine {
 
     public void setPhotos(String photos) {
         this.photos = photos;
-    }
-
-    public String getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId;
     }
 
     public String getPrice() {

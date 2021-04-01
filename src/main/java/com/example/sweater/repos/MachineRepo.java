@@ -25,7 +25,7 @@ public interface MachineRepo extends JpaRepository<Machine, String> {
 
     List<Machine> findByPhotos(String photos);
 
-    List<Machine> findBySourceId(String sourceId);
+    Machine findBySourceId(String sourceId);
 
     List<Machine> findByPrice(String price);
 

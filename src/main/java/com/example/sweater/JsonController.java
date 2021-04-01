@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 @RestController
@@ -22,7 +24,7 @@ public class JsonController {
 
     @GetMapping("source-id")
     public Machine getData(@RequestParam("sourceId") String sourceId) {
-        return (Machine) machineRepo.findBySourceId(sourceId);
+        return machineRepo.findBySourceId(sourceId);
     }
 
     @GetMapping("amount-by-model")
@@ -64,7 +66,9 @@ public class JsonController {
                        @RequestParam("price") String price,
                        @RequestParam("source") String source,
                        @RequestParam("url") String url) {
+
         Machine machine = new Machine();
+
         machine.setOwner(owner);
         machine.setAvailable(available);
         machine.setCountry(country);
@@ -80,7 +84,7 @@ public class JsonController {
         machineRepo.save(machine);
     }
 
-    @PutMapping("update")
+    @PostMapping("update")
     public String update(@RequestParam(value = "sourceId", required = false) String sourceId,
                          @RequestParam(value = "owner", required = false) String owner,
                          @RequestParam(value = "available", required = false) String available,
@@ -95,10 +99,12 @@ public class JsonController {
 
         if (sourceId == null) return "Please enter sourceId!";
 
-        List<Machine> machines = machineRepo.findBySourceId(sourceId);
 
-        if (!machines.isEmpty()) {
-            Machine machine = machines.get(0);
+
+        Machine machine = machineRepo.findBySourceId(sourceId);
+
+
+        if (machine != null) {
             if (owner != null) machine.setOwner(owner);
             if (available != null) machine.setAvailable(available);
             if (country != null) machine.setCountry(country);
@@ -109,6 +115,8 @@ public class JsonController {
             if (price != null) machine.setPrice(price);
             if (source != null) machine.setSource(source);
             if (url != null) machine.setUrl(url);
+
+            machineRepo.save(machine);
 
             return "Success!";
         }
@@ -126,7 +134,6 @@ public class JsonController {
                                           @RequestParam(value = "price", required = false) String price,
                                           @RequestParam(value = "source", required = false) String source,
                                           @RequestParam(value = "url", required = false) String url) {
-
 
 
         Machine machine = new Machine();
