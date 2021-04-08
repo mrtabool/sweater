@@ -58,7 +58,7 @@ public class GreetingController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
                 .contentType(mediaType)
-                .contentLength(file.length()) //
+                .contentLength(file.length())
                 .body(resource);
     }
 
@@ -105,4 +105,5 @@ public class GreetingController {
         }
         return "main";
     }
+
 }
