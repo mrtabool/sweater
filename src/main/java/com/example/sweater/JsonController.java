@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.io.File;
@@ -36,24 +39,24 @@ public class JsonController {
     @Autowired
     private MachineRepo machineRepo;
 
-    @GetMapping("all-machines")
+    @GetMapping("/all-machines")
     public List<Machine> getJson() {
         return machineRepo.findAll();
     }
 
-    @GetMapping("source-id")
+    @GetMapping("/source-id")
     public Machine getData(@RequestParam("sourceId") String sourceId) {
         return machineRepo.findBySourceId(sourceId);
     }
 
-    @GetMapping("amount-by-model")
+    @GetMapping("/amount-by-model")
     public Integer amountByModel(@RequestParam String model) {
         List<Machine> machines = machineRepo.findByMachineType(model);
         return machines.size();
     }
 
 
-    @GetMapping("amount-each-model")
+    @GetMapping("/amount-each-model")
     public Map<String, String> amountEachModel() {
         Map<String, String> amountEachModel = new HashMap<>();
         Set<String> models = new HashSet<>();
@@ -73,7 +76,7 @@ public class JsonController {
         return amountEachModel;
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public void create(@RequestParam("owner") String owner,
                        @RequestParam("available") String available,
                        @RequestParam("country") String country,
@@ -103,7 +106,7 @@ public class JsonController {
         machineRepo.save(machine);
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
     public String update(@RequestParam(value = "sourceId", required = false) String sourceId,
                          @RequestParam(value = "owner", required = false) String owner,
                          @RequestParam(value = "available", required = false) String available,
@@ -142,7 +145,7 @@ public class JsonController {
         return "There is no such machine.";
     }
 
-    @GetMapping("multiple-field")
+    @GetMapping("/multiple-field")
     public List<Machine> getMultipleField(@RequestParam(value = "owner", required = false) String owner,
                                           @RequestParam(value = "available", required = false) String available,
                                           @RequestParam(value = "country", required = false) String country,
@@ -193,7 +196,7 @@ public class JsonController {
                 .body(resource);
     }
 
-    @PostMapping("upload-csv")
+    @PostMapping("/upload-csv")
     public String uploadCSV(@RequestParam("upload-csv") MultipartFile uploadCsv) {
         String[] captions;
         String[] values;
@@ -236,15 +239,16 @@ public class JsonController {
         return "Success";
     }
 
-    @PostMapping("delete-all")
+    @PostMapping("/delete-all")
     public void deleteAll() {
         machineRepo.deleteAll();
     }
 
-    @PostMapping("add-all")
+    @PostMapping("/add-all")
     public List<Machine> addAll(@RequestBody List<Machine> machines) {
         machineRepo.saveAll(machines);
         return machines;
     }
+
 
 }

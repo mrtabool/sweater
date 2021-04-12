@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/greeting")
 public class GreetingController {
 
     private static final String DIRECTORY = "src/main/resources";
@@ -37,7 +38,7 @@ public class GreetingController {
         model.put("machines", machines);
         return "main";
     }
-    @PostMapping("getMachine")
+    @PostMapping("/getMachine")
     public String selectCountry(@RequestParam("country") String country, Map<String, Object> model){
         Iterable<Machine> machines = machineRepo.findAll();
         model.put("machines", machines);
@@ -63,7 +64,7 @@ public class GreetingController {
     }
 
 
-    @PostMapping("csv")
+    @PostMapping("/csv")
     public String uploadCSV(@RequestParam("csv") MultipartFile csv, Map<String, Object> model) {
         String[] captions;
         String[] values;
