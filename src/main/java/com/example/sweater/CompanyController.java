@@ -28,7 +28,7 @@ public class CompanyController {
     @ApiOperation(value = "Shows all companies with sorting and paging.",
             notes = "Provide array params sort like<id,asc> or <title,desc>, page like<0> and size like<20>.",
             response = Page.class)
-    public Page<Company> findAll(@ApiParam(name = "(Example - id,asc)",value = "Array of two parameters you need, to sort the companies on page.", required = true) @RequestParam Optional<String>[] sort,
+    public Page<Company> findAll(@ApiParam(defaultValue = "id,asc", value = "Array of two parameters you need, to sort the companies on page.", required = true) @RequestParam Optional<String>[] sort,
                                  @ApiParam(value = "The companies page you need to check out.") @RequestParam Optional<Integer> page,
                                  @ApiParam(value = "Amount of companies you want to get on one page.", required = true) @RequestParam Integer size) {
 
