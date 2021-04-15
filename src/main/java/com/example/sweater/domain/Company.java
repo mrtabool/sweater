@@ -22,7 +22,7 @@ public class Company {
     @Id
     @ApiModelProperty(value = "The unique id of the company")
     private Long id;
-    @ApiModelProperty(value = "Title of company.", example = "Diego")
+    @ApiModelProperty(value = "Title of company.", example = "Victory")
     private String title;
 
     @ApiModelProperty(value = "The year the company was founded.", example = "2021")
