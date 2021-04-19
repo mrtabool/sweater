@@ -2,16 +2,21 @@ package com.example.sweater;
 
 import com.example.sweater.domain.Company;
 import com.example.sweater.repos.CompanyRepo;
+import io.swagger.annotations.ApiParam;
+import lombok.Getter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.modelmapper.ModelMapper;
 
 import java.util.Collections;
 
@@ -25,13 +30,19 @@ public class ServingWebContentApplication {
     }
 
     @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .paths(PathSelectors.ant("/**"))
                 .apis(RequestHandlerSelectors.basePackage("com.example"))
                 .build()
-                .apiInfo(apiDetails());
+                .apiInfo(apiDetails())
+                .directModelSubstitute(Pageable.class, SwaggerPageable.class);
     }
 
     private ApiInfo apiDetails() {
@@ -44,6 +55,23 @@ public class ServingWebContentApplication {
                 "API License",
                 "https://github.com/mrtabool/sweater",
                 Collections.emptyList());
+    }
+
+
+    @Getter
+    private static class SwaggerPageable {
+
+        @ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.", example = "id,asc")
+        @Nullable
+        private String sort;
+
+        @ApiParam(value = "Results page you want to retrieve (0..N)", example = "0")
+        @Nullable
+        private Integer page;
+
+        @ApiParam(value = "Number of records per page", example = "10")
+        @Nullable
+        private Integer size;
     }
 
 

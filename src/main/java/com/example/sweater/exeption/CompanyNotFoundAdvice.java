@@ -1,6 +1,5 @@
-package com.example.sweater;
+package com.example.sweater.exeption;
 
-import com.example.sweater.domain.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

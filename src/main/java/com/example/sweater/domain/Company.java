@@ -26,6 +26,6 @@ public class Company {
     private String title;
 
     @ApiModelProperty(value = "The year the company was founded.", example = "2021")
-    private int founded;
+    private Integer founded;
 
 }

@@ -1,8 +1,8 @@
-package com.example.sweater;
+package com.example.sweater.exeption;
 
 public class CompanyNotFoundException extends RuntimeException {
 
-    CompanyNotFoundException(Long id) {
+    public CompanyNotFoundException(Long id) {
         super("Could not find company " + id);
     }
 }
