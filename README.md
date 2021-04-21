@@ -5,7 +5,9 @@
 + Make sure you have [Maven installed](https://maven.apache.org/download.cgi).
 
 
-+ Add Maven location to the PATH Environment Variable.
++ Maven.
+
+⋅⋅⋅Add Maven location to the PATH Environment Variable.
 
 
 + Download the project **zip** file and unzip it.
