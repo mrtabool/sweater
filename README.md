@@ -15,7 +15,7 @@
   of the unpacked project.<br/><br/>
   Create an executable **jar** file with the command:
   
-  `mvn package`<br/><br/>
+  `mvn package`<br/>
   
   This command will create a folder named **target**, 
   which will contain our jar file called **sweater-1.0-SNAPSHOT.jar**.
@@ -24,7 +24,7 @@
 + In the Command Line, go above to the **target** directory.<br/><br/>
   Start the server with the command:
   
-  `java -jar sweater-1.0-SNAPSHOT.jar`<br/><br/>
+  `java -jar sweater-1.0-SNAPSHOT.jar`<br/>
 
   To stop the execution, in the console where you ran the command to start the service,
   press `Ctrl` + `C` on your keyboard.
