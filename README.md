@@ -1,6 +1,6 @@
 # Spring REST API
 
-##Let's start our server.
+## Let's start our server.
 
 + Make sure you have [Maven installed](https://maven.apache.org/download.cgi).
 
