@@ -13,7 +13,8 @@
 
 + Launch Command Line and navigate to the main directory
   of the unpacked project.<br/><br/>
-  Create an executable **jar** file with the command:<br/>
+  Create an executable **jar** file with the command:
+  
   `mvn package`<br/><br/>
   
   This command will create a folder named **target**, 
@@ -21,7 +22,8 @@
   
   
 + In the Command Line, go above to the **target** directory.<br/><br/>
-  Start the server with the command:<br/>
+  Start the server with the command:
+  
   `java -jar sweater-1.0-SNAPSHOT.jar`<br/><br/>
 
   To stop the execution, in the console where you ran the command to start the service,
