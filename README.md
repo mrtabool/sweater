@@ -1,4 +1,14 @@
-# Spring REST API
+# Sweater REST API
+
+This server contains a set of endpoints for processing, 
+writing data to the database and providing them to the client. 
+Check out their descriptions 
+on the swagger page when starting the server 
+[localhost:8080/swagger-ui.html](localhost:8080/swagger-ui.html)<br/>
+Or visit an already running server at 
+[Heroku](csv-controller.herokuapp.com/swagger-ui.html)<br/>
+This server contains 3 controllers, while only one is covered 
+with a swagger - this is the company-controller.
 
 ### Let's start our server.
 
@@ -8,7 +18,7 @@
 + Add Maven location to the PATH Environment Variable.
 
 
-+ Download the project **zip** file and unzip it.
++ Download the project **zip** file from git and unzip it.
 
 
 + Launch Command Line and navigate to the main directory
@@ -28,3 +38,5 @@
 
   To stop the execution, in the console where you ran the command to start the service,
   press `Ctrl` + `C` on your keyboard.
+  
+
