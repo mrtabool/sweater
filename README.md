@@ -4,7 +4,7 @@ This server contains a set of endpoints for processing,
 writing data to the database and providing them to the client. 
 Check out their descriptions 
 on the swagger page when starting the server 
-localhost:8080/swagger-ui.html <br/>
+*localhost:8080/swagger-ui.html* <br/>
 Or visit an already running server at 
 [Heroku](http://csv-controller.herokuapp.com/swagger-ui.html) <br/>
 This server contains 3 controllers, while only one is covered 
