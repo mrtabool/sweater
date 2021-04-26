@@ -2,11 +2,11 @@
 
 <body>
     <div>Загрузите CSV файл на ваш компьютер.</div>
-    <form method="get" action="/download">
+    <form method="get" action="/greeting/download">
         <button type="download">Download</button>
     </form>
     <div>Выберите файл который загрузили и отправьте на сервер.</div>
-    <form method="post" action="csv" enctype="multipart/form-data">
+    <form method="post" action="/greeting/csv" enctype="multipart/form-data">
         <input type="file" name="csv">
         <input type="submit" value="Upload">
     </form>
