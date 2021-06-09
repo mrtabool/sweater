@@ -1,13 +1,9 @@
 package com.example.sweater;
 
-import com.example.sweater.domain.Company;
-import com.example.sweater.repos.CompanyRepo;
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.Nullable;

@@ -3,24 +3,16 @@ package com.example.sweater;
 import com.example.sweater.domain.Company;
 import com.example.sweater.dto.CompanyDto;
 import com.example.sweater.repos.CompanyRepo;
-import com.example.sweater.exeption.CompanyNotFoundException;
 import com.example.sweater.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
