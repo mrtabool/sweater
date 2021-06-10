@@ -1,15 +1,20 @@
 <html>
 
 <body>
-    <div>Загрузите CSV файл на ваш компьютер.</div>
-    <form method="get" action="/greeting/download">
+
+<h3>              On this page you can download from the database or upload to the database a data in CSV format.<br>
+    <a href="http://localhost:8080/swagger-ui.html">Or go to the swagger page.</a></h3>
+
+    <div>Download the CSV file to your computer.</div>
+    <form method="get" action="/download">
         <button type="download">Download</button>
     </form>
-    <div>Выберите файл который загрузили и отправьте на сервер.</div>
-    <form method="post" action="/greeting/csv" enctype="multipart/form-data">
+    <div>Select the file you downloaded and send to the server.</div>
+    <form method="post" action="/csv" enctype="multipart/form-data">
         <input type="file" name="csv">
         <input type="submit" value="Upload">
     </form>
+
 
 <!--    <form method="post" action="getMachine">-->
 <!--        <select name="country">-->

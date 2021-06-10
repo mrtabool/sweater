@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "Data of Companies.", description = "Operations with companies database.")
 public class CompanyController {
 
-    @Autowired
-    private final CompanyRepo companyRepo;
 
     @Autowired
     private final CompanyService companyService;

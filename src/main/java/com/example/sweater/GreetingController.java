@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/greeting")
+@RequestMapping("")
 public class GreetingController {
 
     private static final String DIRECTORY = "src/main/resources";
